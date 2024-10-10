@@ -42,7 +42,7 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     const Text(
-                      "Bem-vindo a nossa plataforma!",
+                      "Bem-vindo à plataforma!",
                       style: TextStyle(
                         fontSize: 18,
                         color: Colors.grey,
@@ -51,12 +51,29 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    const Text(
-                      "Games",
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                        fontFamily: "Lemonmilk",
+                    SizedBox(
+                      width: double.infinity,
+                      child: Row(
+                        children: [
+                          const Text(
+                            "Games",
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.white,
+                              fontFamily: "Lemonmilk-bold",
+                            ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 50),
+                              child: Container(
+                                height: 1,
+                                color: Colors.white,
+                              ),
+                            ),
+                          )
+                        ],
                       ),
                     ),
                     const SizedBox(height: 50),
@@ -68,8 +85,17 @@ class HomePage extends StatelessWidget {
                             clipBehavior: Clip.none,
                             children: [
                               Container(
-                                height: 300, //alterar para porcentagem
+                                height: MediaQuery.sizeOf(context).height * 0.4,
                                 decoration: BoxDecoration(
+                                  border: const Border(
+                                      left: BorderSide(
+                                        color: Colors.white,
+                                        width: 5,
+                                      ),
+                                      bottom: BorderSide(
+                                        color: Colors.white,
+                                        width: 5,
+                                      )),
                                   gradient: const LinearGradient(
                                     colors: [
                                       Colors.red,
@@ -81,30 +107,49 @@ class HomePage extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(50),
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsets.only(left: 30),
+                                  padding: const EdgeInsets.only(
+                                      left: 30, bottom: 30),
                                   child: Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: RichText(
-                                      text: const TextSpan(
-                                        style: TextStyle(
-                                          fontSize: 40,
-                                          fontFamily: "RobotoCondensed",
-                                          fontWeight: FontWeight.w900,
-                                        ),
-                                        children: [
-                                          TextSpan(
-                                            text: 'Super\n',
-                                          ),
-                                          TextSpan(
-                                            text: "Mario",
-                                            style: TextStyle(
-                                              fontSize: 45,
-                                              fontWeight: FontWeight.w900,
-                                              fontFamily: 'RobotoCondensed',
+                                    alignment: Alignment.bottomLeft,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                left: 10,
+                                              ),
+                                              child: Image.asset(
+                                                'assets/images/joystick.png',
+                                                height: 30,
+                                                color: Colors.white,
+                                              ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                top: 10,
+                                                left: 10,
+                                              ),
+                                              child: Text(
+                                                "GAME 1",
+                                                style: TextStyle(
+                                                  fontFamily: "Lemonmilk-bold",
+                                                  fontSize: 17,
+                                                  color: Colors.grey[200],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Image.asset(
+                                          'assets/images/mario-text2.png',
+                                          height: 120,
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),
@@ -123,14 +168,19 @@ class HomePage extends StatelessWidget {
                         const SizedBox(width: 10),
                         Flexible(
                           flex: 1,
-                          child: Container(
-                            height: 300,
-                            decoration: BoxDecoration(
-                              color: Colors.amberAccent,
-                              borderRadius: BorderRadius.circular(50),
-                            ),
+                          child: Stack(
+                            clipBehavior: Clip.none,
+                            children: [
+                              Container(
+                                height: MediaQuery.sizeOf(context).height * 0.4,
+                                decoration: BoxDecoration(
+                                  color: Colors.amber,
+                                  borderRadius: BorderRadius.circular(50),
+                                ),
+                              ),
+                            ],
                           ),
-                        )
+                        ),
                       ],
                     )
                   ],
