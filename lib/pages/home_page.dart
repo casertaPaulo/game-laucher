@@ -1,17 +1,55 @@
 // ignore_for_file: avoid_print
 
-import 'package:android_intent_plus/android_intent.dart';
-import 'package:flutter/material.dart';
-import 'package:freela_fabiano/util/Util.dart';
-import 'package:package_info_plus/package_info_plus.dart';
+import 'dart:io';
+import 'package:permission_handler/permission_handler.dart';
 
-class HomePage extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:freela_fabiano/util/Util.dart';
+import 'package:device_apps/device_apps.dart';
+import 'package:open_file/open_file.dart';
+
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    const String packageName = 'com.company.game';
+  State<HomePage> createState() => _HomePageState();
+}
 
+class _HomePageState extends State<HomePage> {
+  void launchGame() async {
+    bool isInstalled = await DeviceApps.isAppInstalled('com.company.game');
+
+    if (isInstalled) {
+      DeviceApps.openApp('com.company.game');
+    } else {
+      print("Não instalado, abrindo instalador!");
+
+      // Solicitar permissão para instalar pacotes
+      var status = await Permission.requestInstallPackages.request();
+      if (status.isGranted) {
+        Directory tempDir = await getTemporaryDirectory();
+        String apkPath = '${tempDir.path}/SpaceShooter.apk';
+
+        try {
+          ByteData data = await rootBundle.load('assets/game/SpaceShooter.apk');
+          List<int> bytes = data.buffer.asUint8List();
+          File apkFile = File(apkPath);
+          await apkFile.writeAsBytes(bytes);
+
+          OpenFile.open(apkPath);
+        } catch (e) {
+          print('Erro ao carregar o APK: $e');
+        }
+      } else {
+        print("Permissão para instalar pacotes não foi concedida.");
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     print("Widget: 👉${MediaQuery.sizeOf(context).width}");
     print("Height: 👉${MediaQuery.sizeOf(context).height}");
     return LayoutBuilder(
@@ -97,13 +135,7 @@ class HomePage extends StatelessWidget {
                                 flex: 1,
                                 child: GestureDetector(
                                   onTap: () {
-                                    const intent = AndroidIntent(
-                                      action: 'android.intent.action.MAIN',
-                                      category:
-                                          'android.intent.category.LAUNCHER',
-                                      package: packageName,
-                                    );
-                                    intent.launch();
+                                    launchGame();
                                   },
                                   child: Stack(
                                     clipBehavior: Clip.none,

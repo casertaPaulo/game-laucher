@@ -8,10 +8,15 @@ environment:
 
 dependencies:
   android_intent_plus: ^5.1.0
+  device_apps: ^2.2.0
   flutter:
     sdk: flutter
   get: ^4.6.6
+  open_file: ^3.5.8
   package_info_plus: ^8.0.3
+  path_provider: ^2.1.4
+  permission_handler: ^11.3.1
+  url_launcher: ^6.3.1
   webview_flutter: ^4.8.0
   webview_flutter_android: ^3.16.8
 
@@ -25,6 +30,9 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/game/SpaceShooter.apk
+    
+
 
   fonts:
     - family: KanitBold
