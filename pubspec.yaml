@@ -7,8 +7,13 @@ environment:
   sdk: '>=3.4.4 <4.0.0'
 
 dependencies:
+  android_intent_plus: ^5.1.0
   flutter:
     sdk: flutter
+  get: ^4.6.6
+  package_info_plus: ^8.0.3
+  webview_flutter: ^4.8.0
+  webview_flutter_android: ^3.16.8
 
 dev_dependencies:
   flutter_test:
@@ -37,3 +42,5 @@ flutter:
     - family: RobotoCondensed
       fonts:
         - asset: assets/fonts/RobotoCondensed.ttf
+
+  

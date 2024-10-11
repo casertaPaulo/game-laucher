@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:freela_fabiano/home_page.dart';
+import 'package:freela_fabiano/pages/home_page.dart';
+import 'package:freela_fabiano/pages/web_view_page.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(const MainApp());
@@ -10,8 +12,13 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
+    return GetMaterialApp(
+      initialRoute: '/',
+      getPages: [
+        GetPage(name: '/', page: () => const HomePage()),
+        GetPage(name: '/webview', page: () => const WebViewPage()),
+      ],
+      home: const Scaffold(
         body: HomePage(),
       ),
     );

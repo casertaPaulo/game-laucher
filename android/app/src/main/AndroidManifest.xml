@@ -2,7 +2,10 @@
     <application
         android:label="freela_fabiano"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:usesCleartextTraffic="true"
+        >
+        
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -42,4 +45,8 @@
             <data android:mimeType="text/plain"/>
         </intent>
     </queries>
+
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
+
 </manifest>
