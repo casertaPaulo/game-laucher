@@ -8,10 +8,13 @@ environment:
 
 dependencies:
   android_intent_plus: ^5.1.0
+  animated_splash_screen: ^1.3.0
   device_apps: ^2.2.0
   flutter:
     sdk: flutter
+  flutter_animate: ^4.5.0
   get: ^4.6.6
+  lottie: ^3.1.2
   open_file: ^3.5.8
   package_info_plus: ^8.0.3
   path_provider: ^2.1.4
@@ -25,12 +28,14 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^3.0.0
 
+
 flutter:
   uses-material-design: true
 
   assets:
     - assets/images/
     - assets/game/SpaceShooter.apk
+    - assets/game/jogo2.apk
     
 
 
