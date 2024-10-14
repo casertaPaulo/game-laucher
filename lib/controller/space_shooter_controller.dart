@@ -1,21 +1,26 @@
+// ignore_for_file: avoid_print, overridden_fields
+
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:device_apps/device_apps.dart';
 import 'package:flutter/services.dart';
-import 'package:freela_fabiano/service/game_service.dart';
-import 'package:get/get.dart';
+import 'package:freela_fabiano/controller/game_controller.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 
-class SpaceShooterService extends GameService {
+class SpaceShooterController extends GameController {
   @override
-  RxBool isGameInstalled = false.obs;
+  void onInit() {
+    super.onInit();
+    isAppInstalled();
+  }
 
   @override
   Future<void> isAppInstalled() async {
     isGameInstalled.value =
         await DeviceApps.isAppInstalled('com.company.spaceshooter');
+
+    isInstalling.value = false;
   }
 
   @override

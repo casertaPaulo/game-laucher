@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:freela_fabiano/service/game_service.dart';
+import 'package:freela_fabiano/controller/game_controller.dart';
 
 import 'package:freela_fabiano/util/Util.dart';
 import 'package:get/get.dart';
 
 class BlockButton extends StatelessWidget {
-  final GameService gameService;
-  const BlockButton({super.key, required this.gameService});
+  final GameController gameController;
+  const BlockButton({super.key, required this.gameController});
 
   @override
   Widget build(BuildContext context) {
@@ -29,19 +29,21 @@ class BlockButton extends StatelessWidget {
                     fontFamily: "LemonMilk-bold",
                   )),
               onPressed: () {
-                gameService.launchGame();
+                gameController.launchGame();
               },
-              label: gameService.isInstalling.value
+              label: gameController.isInstalling.value
                   ? const CircularProgressIndicator(
                       color: Colors.white,
                     )
                   : Text(
-                      gameService.isGameInstalled.value ? "JOGAR" : "INSTALAR",
+                      gameController.isGameInstalled.value
+                          ? "JOGAR"
+                          : "INSTALAR",
                       style: const TextStyle(color: Colors.white),
                     ),
-              icon: !gameService.isInstalling.value
+              icon: !gameController.isInstalling.value
                   ? Icon(
-                      gameService.isGameInstalled.value
+                      gameController.isGameInstalled.value
                           ? Icons.play_arrow
                           : Icons.install_mobile,
                       color: Colors.white,
