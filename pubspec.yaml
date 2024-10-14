@@ -34,8 +34,7 @@ flutter:
 
   assets:
     - assets/images/
-    - assets/game/SpaceShooter.apk
-    - assets/game/jogo2.apk
+    - assets/game/
     
 
 

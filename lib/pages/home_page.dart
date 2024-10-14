@@ -5,7 +5,8 @@ import 'package:freela_fabiano/pages/widgets/side_bar_space_shooter.dart';
 import 'package:freela_fabiano/pages/widgets/side_bar_super_mario.dart';
 import 'package:freela_fabiano/pages/widgets/space_shooter_card.dart';
 import 'package:freela_fabiano/pages/widgets/super_mario_card.dart';
-import 'package:freela_fabiano/service/game_service.dart';
+import 'package:freela_fabiano/service/space_shooter_service.dart';
+import 'package:freela_fabiano/service/super_mario_service.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:freela_fabiano/util/Util.dart';
@@ -18,14 +19,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
-  final GameService _gameService = Get.find<GameService>();
+  final SpaceShooterService _spaceShooterService =
+      Get.find<SpaceShooterService>();
+  final SuperMarioService _superMarioService = Get.find<SuperMarioService>();
   RxBool marioSelect = false.obs;
 
   @override
   void initState() {
     super.initState();
-    _gameService.hasPermission();
-    _gameService.isAppInstalled();
+    _spaceShooterService.hasPermission();
+    _spaceShooterService.isAppInstalled();
+    _superMarioService.isAppInstalled();
     WidgetsBinding.instance.addObserver(this);
   }
 
@@ -33,8 +37,10 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) async {
     if (state == AppLifecycleState.resumed) {
-      _gameService.isInstalling.value = false;
-      await _gameService.isAppInstalled();
+      _spaceShooterService.isInstalling.value = false;
+      _superMarioService.isInstalling.value = false;
+      await _spaceShooterService.isAppInstalled();
+      await _superMarioService.isAppInstalled();
     }
   }
 
@@ -202,8 +208,8 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
               child: Obx(
                 () {
                   return marioSelect.value
-                      ? SideBarSuperMario(gameService: _gameService)
-                      : SideBarSpaceShooter(gameService: _gameService);
+                      ? SideBarSuperMario(gameService: _superMarioService)
+                      : SideBarSpaceShooter(gameService: _spaceShooterService);
                 },
               ),
             )
