@@ -3,12 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:freela_fabiano/pages/home_page.dart';
 import 'package:freela_fabiano/pages/splash_screen.dart';
 import 'package:freela_fabiano/pages/web_view_page.dart';
-<<<<<<< HEAD
-import 'package:freela_fabiano/service/space_shooter_service.dart';
-import 'package:freela_fabiano/service/super_mario_service.dart';
-=======
->>>>>>> a716d2531d37f79a910d4238d86a056babbcc9e0
-import 'package:get/get.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get/get_navigation/src/routes/get_route.dart';
 
 void main() {
   //Get.put(GameService());
