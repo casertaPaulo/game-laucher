@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:freela_fabiano/pages/components/block_button.dart';
-import 'package:freela_fabiano/service/game_service.dart';
+import 'package:freela_fabiano/controller/space_shooter_controller.dart';
 import 'package:freela_fabiano/util/util.dart';
+import 'package:get/get.dart';
 
 class SideBarSpaceShooter extends StatelessWidget {
-  final GameService gameService;
-  const SideBarSpaceShooter({super.key, required this.gameService});
+  const SideBarSpaceShooter({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +82,7 @@ class SideBarSpaceShooter extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   BlockButton(
-                    gameService: gameService,
+                    gameController: Get.put(SpaceShooterController()),
                   )
                 ],
               ),

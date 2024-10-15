@@ -3,7 +3,7 @@
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-abstract class GameService extends GetxService {
+abstract class GameController extends GetxController {
   RxBool isGameInstalled = false.obs;
   RxBool isInstalling = false.obs;
 
