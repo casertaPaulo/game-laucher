@@ -55,4 +55,7 @@ flutter:
       fonts:
         - asset: assets/fonts/RobotoCondensed.ttf
 
+    - family: LilitaOne
+      fonts:
+        - asset: assets/fonts/LilitaOne-Regular.ttf
   

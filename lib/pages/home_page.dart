@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                                 text: const TextSpan(
                                   style: TextStyle(
                                     fontSize: 50,
-                                    fontFamily: "RobotoCondensed",
+                                    fontFamily: "LemonMilk",
                                   ),
                                   children: [
                                     TextSpan(
@@ -87,8 +87,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                                       text: "Paulo",
                                       style: TextStyle(
                                         fontSize: 50,
-                                        fontFamily: 'RobotoCondensed',
-                                        fontWeight: FontWeight.w900,
+                                        fontFamily: 'LemonMilk-bold',
                                       ),
                                     ),
                                   ],
