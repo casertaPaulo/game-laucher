@@ -17,10 +17,9 @@ class SuperMarioController extends GameController {
 
   @override
   Future<void> isAppInstalled() async {
+    isInstalling.value = false;
     isGameInstalled.value =
         await DeviceApps.isAppInstalled('com.company.supermario');
-
-    isInstalling.value = false;
   }
 
   @override

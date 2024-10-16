@@ -82,7 +82,7 @@ class SideBarSpaceShooter extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   BlockButton(
-                    gameController: Get.put(SpaceShooterController()),
+                    gameController: Get.find<SpaceShooterController>(),
                   )
                 ],
               ),

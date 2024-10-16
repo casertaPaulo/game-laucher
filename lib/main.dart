@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:freela_fabiano/controller/super_mario_controller.dart';
 import 'package:freela_fabiano/pages/home_page.dart';
 import 'package:freela_fabiano/pages/splash_screen.dart';
 import 'package:freela_fabiano/pages/web_view_page.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:get/get.dart';
+import 'controller/space_shooter_controller.dart';
 
 void main() {
   //Get.put(GameService());
-  //Get.put(SpaceShooterService());
-  //Get.put(SuperMarioService());
+  Get.put(SpaceShooterController());
+  Get.put(SuperMarioController());
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeRight,

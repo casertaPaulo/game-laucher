@@ -73,7 +73,7 @@ class SideBarSuperMario extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     BlockButton(
-                      gameController: Get.put(SuperMarioController()),
+                      gameController: Get.find<SuperMarioController>(),
                     ),
                   ],
                 ),

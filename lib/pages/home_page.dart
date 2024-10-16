@@ -31,8 +31,8 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) async {
     if (state == AppLifecycleState.resumed) {
-      Get.put(SuperMarioController()).isAppInstalled();
-      Get.put(SpaceShooterController()).isAppInstalled();
+      Get.find<SuperMarioController>().isAppInstalled();
+      Get.find<SpaceShooterController>().isAppInstalled();
     }
   }
 
