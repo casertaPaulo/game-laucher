@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:freela_fabiano/pages/components/block_button.dart';
+import 'package:freela_fabiano/app/ui/widgets/block_button.dart';
 
-import 'package:freela_fabiano/controller/super_mario_controller.dart';
+import 'package:freela_fabiano/app/controller/super_mario_controller.dart';
 import 'package:freela_fabiano/util/util.dart';
 import 'package:get/get.dart';
 
@@ -31,11 +31,11 @@ class SideBarSuperMario extends StatelessWidget {
                   gradient: LinearGradient(
                     colors: [
                       Colors.red,
-                      Color(0xFF12284d), // Cor de fundo para combinar
+                      Color(0xFF12284d),
                     ],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    stops: [0.5, 0.9], // Define onde o degradê começa
+                    stops: [0.5, 0.9],
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(25)),
                 ),

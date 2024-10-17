@@ -1,6 +1,5 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:freela_fabiano/pages/home_page.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -11,7 +10,8 @@ class SplashScreen extends StatelessWidget {
       splash: Center(
         child: Image.asset('assets/images/game-controller.png'),
       ),
-      nextScreen: const HomePage(),
+      nextScreen: const Placeholder(),
+      nextRoute: '/home',
       backgroundColor: const Color(0xFF102447),
       duration: 2000,
       curve: Curves.easeInOut,

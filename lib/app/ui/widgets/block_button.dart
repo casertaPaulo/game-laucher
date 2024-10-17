@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:freela_fabiano/controller/game_controller.dart';
+import 'package:freela_fabiano/app/controller/game_controller.dart';
 
 import 'package:freela_fabiano/util/Util.dart';
 import 'package:get/get.dart';
@@ -11,12 +11,11 @@ class BlockButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // REALIZAR OPERAÇÕES AQUI
-
     return SizedBox(
         width: double.infinity,
         child: Obx(
           () {
+            var state = gameController;
             return ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
                   elevation: 2,
@@ -29,21 +28,19 @@ class BlockButton extends StatelessWidget {
                     fontFamily: "LemonMilk-bold",
                   )),
               onPressed: () {
-                gameController.launchGame();
+                state.launchGame();
               },
-              label: gameController.isInstalling.value
+              label: state.isInstalling.value
                   ? const CircularProgressIndicator(
                       color: Colors.white,
                     )
                   : Text(
-                      gameController.isGameInstalled.value
-                          ? "JOGAR"
-                          : "INSTALAR",
+                      state.isGameInstalled.value ? "JOGAR" : "INSTALAR",
                       style: const TextStyle(color: Colors.white),
                     ),
-              icon: !gameController.isInstalling.value
+              icon: !state.isInstalling.value
                   ? Icon(
-                      gameController.isGameInstalled.value
+                      state.isGameInstalled.value
                           ? Icons.play_arrow
                           : Icons.install_mobile,
                       color: Colors.white,

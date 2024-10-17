@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:freela_fabiano/controller/super_mario_controller.dart';
-import 'package:freela_fabiano/pages/home_page.dart';
-import 'package:freela_fabiano/pages/splash_screen.dart';
-import 'package:freela_fabiano/pages/web_view_page.dart';
+import 'package:freela_fabiano/app/routes/app_routes.dart';
 import 'package:get/get.dart';
-import 'controller/space_shooter_controller.dart';
 
 void main() {
-  //Get.put(GameService());
-  Get.put(SpaceShooterController());
-  Get.put(SuperMarioController());
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.landscapeRight,
@@ -27,14 +20,8 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/',
-      getPages: [
-        GetPage(name: '/', page: () => const HomePage()),
-        GetPage(name: '/webview', page: () => const WebViewPage()),
-      ],
-      home: const Scaffold(
-        body: SplashScreen(),
-      ),
+      initialRoute: AppRoutes.initial,
+      getPages: AppRoutes.routes,
     );
   }
 }

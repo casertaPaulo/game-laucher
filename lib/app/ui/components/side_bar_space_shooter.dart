@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:freela_fabiano/pages/components/block_button.dart';
-import 'package:freela_fabiano/controller/space_shooter_controller.dart';
+import 'package:freela_fabiano/app/ui/widgets/block_button.dart';
+import 'package:freela_fabiano/app/controller/space_shooter_controller.dart';
 import 'package:freela_fabiano/util/util.dart';
 import 'package:get/get.dart';
 

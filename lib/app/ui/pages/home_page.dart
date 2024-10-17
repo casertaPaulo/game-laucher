@@ -1,49 +1,21 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:freela_fabiano/pages/widgets/side_bar_space_shooter.dart';
-import 'package:freela_fabiano/pages/widgets/side_bar_super_mario.dart';
-import 'package:freela_fabiano/pages/widgets/space_shooter_card.dart';
-import 'package:freela_fabiano/pages/widgets/super_mario_card.dart';
-import 'package:freela_fabiano/controller/space_shooter_controller.dart';
-import 'package:freela_fabiano/controller/super_mario_controller.dart';
+import 'package:freela_fabiano/app/controller/home_controller.dart';
+import 'package:freela_fabiano/app/ui/components/side_bar_space_shooter.dart';
+import 'package:freela_fabiano/app/ui/components/side_bar_super_mario.dart';
+import 'package:freela_fabiano/app/ui/components/space_shooter_card.dart';
+import 'package:freela_fabiano/app/ui/components/super_mario_card.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:freela_fabiano/util/Util.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
-  RxBool marioSelect = false.obs;
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addObserver(this);
-  }
-
-  // Verifica quando o usuário retorna ao contexto do app
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) async {
-    if (state == AppLifecycleState.resumed) {
-      Get.find<SuperMarioController>().isAppInstalled();
-      Get.find<SpaceShooterController>().isAppInstalled();
-    }
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    var controller = Get.find<HomeController>();
     print("Widget: 👉${MediaQuery.sizeOf(context).width}");
     print("Height: 👉${MediaQuery.sizeOf(context).height}");
     return SafeArea(
@@ -151,7 +123,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                               Flexible(
                                 child: GestureDetector(
                                   onTap: () {
-                                    marioSelect.value = false;
+                                    controller.isMarioSelected.value = false;
                                     print("CLicou no SpaceShooter");
                                   },
                                   child: Obx(
@@ -161,7 +133,9 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                                         .then()
                                         .scaleXY(
                                           begin: 1,
-                                          end: marioSelect.value ? 0.9 : 1.1,
+                                          end: controller.isMarioSelected.value
+                                              ? 0.9
+                                              : 1.1,
                                         ),
                                   ),
                                 ),
@@ -170,7 +144,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                               Flexible(
                                 child: GestureDetector(
                                   onTap: () {
-                                    marioSelect.value = true;
+                                    controller.isMarioSelected.value = true;
                                     print("CLicou no SuperMario");
                                   },
                                   child: Obx(
@@ -182,7 +156,9 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                                           begin: 1,
                                           curve: Curves.elasticOut,
                                           duration: 1500.ms,
-                                          end: marioSelect.value ? 1.1 : 0.9,
+                                          end: controller.isMarioSelected.value
+                                              ? 1.1
+                                              : 0.9,
                                         ),
                                   ),
                                 ),
@@ -199,7 +175,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
             Expanded(
               child: Obx(
                 () {
-                  return marioSelect.value
+                  return controller.isMarioSelected.value
                       ? const SideBarSuperMario()
                       : const SideBarSpaceShooter();
                 },
