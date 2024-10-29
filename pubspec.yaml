@@ -1,0 +1,48 @@
+name: game_laucher
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.5.3
+
+dependencies:
+  animated_splash_screen: ^1.3.0
+  flutter:
+    sdk: flutter
+  flutter_animate: ^4.5.0
+  flutter_svg: ^2.0.10+1
+  get: ^4.6.6
+  flutter_unity_widget:
+    git:
+      url: https://github.com/juicycleff/flutter-unity-view-widget.git
+      ref: flutter_3.24_android_hotfix # branch name
+      # UPDATE: this fix is now included in the master branch
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    
+  fonts:
+    - family: KanitBold
+      fonts:
+        - asset: assets/fonts/Kanit-Bold.ttf
+
+    - family: LEMONMILK
+      fonts:
+        - asset: assets/fonts/LEMONMILK-Regular.otf
+
+    - family: LemonMilk-bold
+      fonts:
+        - asset: assets/fonts/LEMONMILK-Bold.otf
+    
+    - family: RobotoCondensed
+      fonts:
+        - asset: assets/fonts/RobotoCondensed.ttf
