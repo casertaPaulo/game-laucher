@@ -24,7 +24,11 @@ class BlockButton extends StatelessWidget {
                     fontFamily: "LemonMilk-bold",
                   )),
               onPressed: () {
-                Get.to(() => Unity(scene: gameScene));
+                Get.to(
+                  transition: Transition.fadeIn,
+                  //duration: const Duration(milliseconds: 500),
+                  () => Unity(scene: gameScene),
+                );
               },
               label: const Text(
                 "JOGAR",
@@ -35,7 +39,9 @@ class BlockButton extends StatelessWidget {
                 color: Colors.white,
               ))
           .animate(
-            onComplete: (controller) => controller.stop(),
+            onComplete: (controller) {
+              controller.stop();
+            },
           )
           .fadeIn(
             curve: Curves.easeInOut,

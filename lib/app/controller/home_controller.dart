@@ -1,16 +1,21 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-class HomeController extends GetxController with WidgetsBindingObserver {
+class HomeController extends GetxController {
   RxBool isMarioSelected = false.obs;
   @override
-  void onInit() {
+  void onInit() async {
     // Define orientação fixada na horizontal ao entrar na página
-    SystemChrome.setPreferredOrientations([
+    await SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
     ]);
     super.onInit();
+  }
+
+  @override
+  void onClose() {
+    print("FECHANDO O STATE");
+    super.onClose();
   }
 }

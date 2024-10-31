@@ -1,6 +1,9 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_unity_widget/flutter_unity_widget.dart';
+import 'package:game_laucher/app/controller/unity_controller.dart';
+import 'package:get/get.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -8,7 +11,18 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
-      splash: Center(child: SvgPicture.asset("assets/images/splash-image.svg")),
+      splash: Stack(
+        children: [
+          UnityWidget(
+            onUnityCreated: (controller) {
+              controller.dispose();
+            },
+          ),
+          Center(
+            child: SvgPicture.asset("assets/images/splash-image.svg"),
+          ),
+        ],
+      ),
       nextScreen: const Placeholder(),
       nextRoute: '/home',
       backgroundColor: const Color(0xFF102447),

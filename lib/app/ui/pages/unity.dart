@@ -1,7 +1,11 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
-import 'package:game_laucher/app/ui/pages/home_page.dart';
+import 'package:game_laucher/app/controller/unity_controller.dart';
+import 'package:game_laucher/util/util.dart';
 import 'package:get/get.dart';
 
 class Unity extends StatefulWidget {
@@ -9,99 +13,154 @@ class Unity extends StatefulWidget {
   const Unity({super.key, required this.scene});
 
   @override
-  State<Unity> createState() => _UnityState();
+  // ignore: library_private_types_in_public_api
+  _UnityState createState() => _UnityState();
 }
 
 class _UnityState extends State<Unity> {
-  static final GlobalKey<ScaffoldState> _scaffoldKey =
-      GlobalKey<ScaffoldState>();
-  late UnityWidgetController _unityWidgetController;
+  var state = Get.find<UnityController>();
+  var isLoading = true.obs;
 
-  // Callback que conecta o controller criado ao UnityWidgetController
   void onUnityCreated(UnityWidgetController controller) {
-    setState(() {
-      _unityWidgetController = controller;
-    });
-  }
+    // Armazena o controlador Unity na instância de UnityController
+    state.unityWidgetController = controller;
 
-  void changeScene(String scene) {
-    _unityWidgetController.postMessage(
+    controller.postMessage(
       'SceneControl',
       'LoadScene',
       widget.scene,
     );
+
+    // Define a cena para carregar após o Unity estar completamente carregado
+    controller.isLoaded()?.then((loaded) {
+      if (loaded!) {
+        state.isUnityLoaded.value = true;
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    Future.delayed(const Duration(seconds: 5), () {
+      isLoading.value = false;
+    });
   }
 
   @override
   void dispose() {
-    _unityWidgetController.dispose();
+    //Seta a orientação na horizontal.
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
-      body: SafeArea(
-        bottom: false,
-        child: PopScope(
-          child: Stack(
-            children: [
-              UnityWidget(
-                onUnityCreated: onUnityCreated,
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 50),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+      body: Stack(
+        children: [
+          UnityWidget(
+            runImmediately: true,
+            fullscreen: false,
+            onUnityCreated: (controller) {
+              state.unityWidgetController = controller;
+              print("INICIANDO O CONTROLADOR NO STATE");
+              controller.postMessage(
+                'SceneControl',
+                'LoadScene',
+                widget.scene,
+              );
+            },
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+                padding: const EdgeInsets.only(bottom: 50),
+                child: FloatingActionButton(
+                  heroTag: 'bt2',
+                  backgroundColor: Colors.white,
+                  child: const Center(
+                    child: Icon(
+                      Icons.home,
+                      size: 35,
+                    ),
+                  ),
+                  onPressed: () {
+                    Get.offNamed('/home');
+                  },
+                )),
+          ),
+          // Carrega a tela por 5 segundos
+          Obx(() {
+            return isLoading.value
+                ? Stack(
                     children: [
-                      FloatingActionButton(
-                        backgroundColor: Colors.white,
-                        child: const Center(
-                          child: Icon(
-                            Icons.change_circle,
-                            size: 35,
+                      Container(
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(
+                                'assets/images/background-space.png'),
+                            alignment: Alignment.topCenter,
+                            fit: BoxFit.cover,
                           ),
                         ),
-                        onPressed: () {
-                          changeScene(widget.scene);
-                        },
                       ),
-                      const SizedBox(width: 25),
-                      FloatingActionButton(
-                        backgroundColor: Colors.white,
-                        child: const Center(
-                          child: Icon(
-                            Icons.home,
-                            size: 35,
-                          ),
+                      // Degradê para suavizar a transição para a cor de fundo
+                      Container(
+                          decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            Colors.transparent,
+                            Color(0xFF12284d), // Cor de fundo para combinar
+                          ],
+                          begin: Alignment.centerRight,
+                          end: Alignment.centerLeft,
+                          stops: [0.2, 0.8], // Define onde o degradê começa
                         ),
-                        onPressed: () {
-                          setState(() {
-                            _unityWidgetController.dispose();
-                          });
-                          Get.off(
-                            () => const HomePage(),
-                          );
-                        },
-                      ),
-                      const SizedBox(width: 25),
-                      const Text(
-                        "Jogo",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'LemonMilk-bold',
+                      )),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Image.asset(
+                          'assets/images/ship-normal2.png',
+                          height: Util.height(context) * .8,
+                        ),
+                      )
+                          .animate(
+                            onPlay: (controller) => controller.repeat(),
+                            onComplete: (controller) => controller.dispose(),
+                          )
+                          .then()
+                          .moveY(
+                            begin: -20,
+                            end: 15,
+                            curve: Curves.easeInOut,
+                            duration: 1000.ms,
+                          )
+                          .then()
+                          .moveY(
+                            begin: 15,
+                            end: -20,
+                            curve: Curves.easeInOut,
+                          ),
+                      const Align(
+                        alignment: Alignment.bottomLeft,
+                        child: Padding(
+                          padding: EdgeInsets.all(50.0),
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                            backgroundColor: Colors.blue,
+                          ),
                         ),
                       ),
                     ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+                  )
+                : const SizedBox();
+          })
+        ],
       ),
     );
   }
