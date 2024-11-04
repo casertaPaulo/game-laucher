@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:game_laucher/app/controller/home_controller.dart';
 import 'package:game_laucher/app/ui/components/side_bar_space_shooter.dart';
@@ -16,6 +17,10 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      //DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
     var controller = Get.find<HomeController>();
     print("Widget: 👉${MediaQuery.sizeOf(context).width}");
     print("Height: 👉${MediaQuery.sizeOf(context).height}");

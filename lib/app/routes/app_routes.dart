@@ -1,6 +1,7 @@
 import 'package:game_laucher/app/bindings/home_binding.dart';
 import 'package:game_laucher/app/ui/pages/home_page.dart';
 import 'package:game_laucher/app/ui/pages/splash_page.dart';
+import 'package:game_laucher/app/ui/pages/unity.dart';
 import 'package:get/get.dart';
 
 class AppRoutes {
@@ -16,5 +17,9 @@ class AppRoutes {
       page: () => const HomePage(),
       binding: HomeBinding(),
     ),
+    GetPage(
+      name: '/unity/:id',
+      page: () => const Unity(),
+    )
   ];
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:game_laucher/app/ui/pages/unity.dart';
 import 'package:game_laucher/util/util.dart';
 import 'package:get/get.dart';
 
@@ -24,11 +23,7 @@ class BlockButton extends StatelessWidget {
                     fontFamily: "LemonMilk-bold",
                   )),
               onPressed: () {
-                Get.to(
-                  transition: Transition.fadeIn,
-                  //duration: const Duration(milliseconds: 500),
-                  () => Unity(scene: gameScene),
-                );
+                Get.toNamed('/unity/$gameScene');
               },
               label: const Text(
                 "JOGAR",
