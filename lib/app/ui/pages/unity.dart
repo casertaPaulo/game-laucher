@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
+import 'package:game_laucher/app/controller/unity_controller.dart';
 import 'package:game_laucher/util/util.dart';
 import 'package:get/get.dart';
 
@@ -12,14 +13,17 @@ class Unity extends StatefulWidget {
 }
 
 class _UnityState extends State<Unity> {
-  UnityWidgetController? unityWidgetController;
+  UnityController unity = Get.find();
   var isLoading = true.obs;
+  var isPaused = false.obs;
 
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 5), () {
+    Future.delayed(const Duration(seconds: 3), () {
       isLoading.value = false;
+    }).then((_) {
+      unity.unityController!.resume();
     });
   }
 
@@ -31,20 +35,65 @@ class _UnityState extends State<Unity> {
         children: [
           UnityWidget(
             onUnityCreated: (controller) {
-              onUnityCreated(controller, idPage!);
+              unity.onUnityCreated(controller, idPage!);
             },
           ),
           Padding(
             padding: const EdgeInsets.all(18.0),
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: FloatingActionButton(
-                onPressed: () {
-                  Get.toNamed('/home');
-                },
-                backgroundColor: Colors.white,
-                child: const Icon(Icons.home),
-              ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                FloatingActionButton(
+                  heroTag: 'home',
+                  onPressed: () async {
+                    if (await unity.unityController!.isLoaded() == true) {
+                      await unity.unityController!.unload();
+                    }
+                    await unity.unityController!.resume();
+                    Get.offNamed('/home');
+                  },
+                  backgroundColor: Colors.white,
+                  child: const Icon(Icons.home),
+                ),
+                const SizedBox(height: 10),
+                Obx(() {
+                  return FloatingActionButton(
+                    heroTag: 'pause',
+                    onPressed: () async {
+                      if (await unity.unityController!.isPaused() == true) {
+                        unity.unityController!.resume();
+                        isPaused(false);
+                      } else {
+                        unity.unityController!.pause();
+                        isPaused(true);
+                      }
+                    },
+                    backgroundColor: Colors.white,
+                    child: Icon(
+                      isPaused.value ? Icons.play_arrow : Icons.pause,
+                    ),
+                  );
+                }),
+                const SizedBox(height: 10),
+                // FloatingActionButton(
+                //   heroTag: 'resume',
+                //   onPressed: () {
+                //     unityWidgetController!.resume();
+                //   },
+                //   backgroundColor: Colors.white,
+                //   child: const Icon(Icons.play_arrow),
+                // ),
+                // const SizedBox(height: 10),
+                // FloatingActionButton(
+                //   heroTag: 'unload',
+                //   onPressed: () {
+                //     unityWidgetController!.unload();
+                //   },
+                //   backgroundColor: Colors.white,
+                //   child: const Icon(Icons.delete),
+                // ),
+              ],
             ),
           ),
           Obx(() {
@@ -119,19 +168,19 @@ class _UnityState extends State<Unity> {
   }
 
   // Callback para atribuar o controllador da Unity Widget.
-  void onUnityCreated(UnityWidgetController controller, String scene) {
-    unityWidgetController = controller;
-    changeScene(scene);
-  }
+  // void onUnityCreated(UnityWidgetController controller, String scene) {
+  //   unityWidgetController = controller;
+  //   changeScene(scene);
+  // }
 
-  // Aciona o método de troca de cena da Unity.
-  void changeScene(String scene) async {
-    unityWidgetController?.postMessage(
-      'SceneControl',
-      'LoadScene',
-      scene,
-    );
-  }
+  // // Aciona o método de troca de cena da Unity.
+  // void changeScene(String scene) async {
+  //   unityWidgetController?.postMessage(
+  //     'SceneControl',
+  //     'LoadScene',
+  //     scene,
+  //   );
+  // }
 }
 
 
