@@ -40,7 +40,7 @@ class _UnityState extends State<Unity> {
             },
           ),
           Padding(
-            padding: const EdgeInsets.all(18.0),
+            padding: const EdgeInsets.symmetric(horizontal: 30),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,

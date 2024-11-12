@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_print
 
-import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 import 'package:game_laucher/app/controller/home_controller.dart';
 import 'package:game_laucher/app/controller/unity_controller.dart';
@@ -28,10 +28,14 @@ class HomePage extends StatelessWidget {
         backgroundColor: const Color(0xFF102447),
         body: Stack(
           children: [
-            UnityWidget(
-              onUnityCreated: (controller) {
-                unity.onUnityCreated(controller);
-              },
+            SizedBox(
+              height: 50,
+              width: 50,
+              child: UnityWidget(
+                onUnityCreated: (controller) {
+                  unity.onUnityCreated(controller);
+                },
+              ),
             ),
             Row(
               children: [
@@ -50,54 +54,64 @@ class HomePage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                //color: Colors.redAccent,
-                                width: Util.width(context) * .25,
-                                child: FittedBox(
-                                  child: RichText(
-                                    text: const TextSpan(
-                                      style: TextStyle(
-                                        fontSize: 50,
-                                        fontFamily: "RobotoCondensed",
-                                      ),
-                                      children: [
-                                        TextSpan(
-                                          text: 'Olá, ',
-                                        ),
-                                        TextSpan(
-                                          text: "Paulo",
-                                          style: TextStyle(
-                                            fontSize: 50,
-                                            fontFamily: 'RobotoCondensed',
-                                            fontWeight: FontWeight.w900,
+                          SizedBox(
+                            width: double.infinity,
+                            child: Card(
+                              elevation: 4,
+                              color: const Color(0xFF12284d),
+                              child: Padding(
+                                padding: EdgeInsets.all(
+                                  Util.height(context) * .025,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      //color: Colors.blue,
+                                      width: Util.width(context) * .25,
+                                      child: FittedBox(
+                                        child: RichText(
+                                          text: const TextSpan(
+                                            style: TextStyle(
+                                              fontSize: 50,
+                                              fontFamily: "LemonMilk-bold",
+                                            ),
+                                            children: [
+                                              TextSpan(
+                                                text: 'Bem-',
+                                              ),
+                                              TextSpan(
+                                                text: "Vindo",
+                                                style: TextStyle(
+                                                  fontSize: 50,
+                                                  fontWeight: FontWeight.w900,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 5),
-                                child: SizedBox(
-                                  //color: Colors.blue,
-                                  width: Util.width(context) * .2,
-                                  child: const FittedBox(
-                                    child: Text(
-                                      "Bem-vindo à plataforma!",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        letterSpacing: 2,
-                                        fontFamily: "RobotoCondensed",
                                       ),
                                     ),
-                                  ),
+                                    SizedBox(
+                                      //color: Colors.red,
+                                      width: Util.width(context) * .25,
+                                      height: Util.height(context) * .07,
+                                      child: FittedBox(
+                                        child: Text(
+                                          textAlign: TextAlign.left,
+                                          "Exercite-se enquanto joga!",
+                                          style: TextStyle(
+                                            color: Colors.grey[300],
+                                            fontWeight: FontWeight.w900,
+                                            fontFamily: "RobotoCondensed",
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ],
+                            ),
                           ),
                           Column(
                             children: [

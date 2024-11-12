@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 class UnityController extends GetxController {
   UnityWidgetController? unityController;
 
-  void onUnityCreated(UnityWidgetController unityWidgetController) {
+  onUnityCreated(UnityWidgetController unityWidgetController) {
     unityController = unityWidgetController;
   }
 
