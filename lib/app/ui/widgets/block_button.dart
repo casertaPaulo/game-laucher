@@ -23,7 +23,7 @@ class BlockButton extends StatelessWidget {
                     fontFamily: "LemonMilk-bold",
                   )),
               onPressed: () {
-                Get.toNamed('/unity/$gameScene');
+                Get.offNamed('/unity/$gameScene');
               },
               label: const Text(
                 "JOGAR",

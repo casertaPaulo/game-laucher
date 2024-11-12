@@ -16,26 +16,27 @@ class _UnityState extends State<Unity> {
   UnityController unity = Get.find();
   var isLoading = true.obs;
   var isPaused = false.obs;
+  var idPage = Get.parameters['id'];
 
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 3), () {
-      isLoading.value = false;
-    }).then((_) {
-      unity.unityController!.resume();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      unity.changeScene(idPage!);
+      Future.delayed(const Duration(seconds: 3), () {
+        isLoading(false);
+      });
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    var idPage = Get.parameters['id'];
     return Scaffold(
       body: Stack(
         children: [
           UnityWidget(
             onUnityCreated: (controller) {
-              unity.onUnityCreated(controller, idPage!);
+              unity.onUnityCreated(controller);
             },
           ),
           Padding(

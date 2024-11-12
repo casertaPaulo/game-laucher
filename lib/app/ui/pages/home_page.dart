@@ -19,10 +19,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
     HomeController controller = Get.find();
     UnityController unity = Get.find();
     print("Widget: 👉${MediaQuery.sizeOf(context).width}");
@@ -32,17 +28,10 @@ class HomePage extends StatelessWidget {
         backgroundColor: const Color(0xFF102447),
         body: Stack(
           children: [
-            SizedBox(
-              width: 50,
-              height: 50,
-              child: UnityWidget(
-                onUnityCreated: (controller) async {
-                  unity.onUnityCreated(controller, "PinkScene");
-                  if (await unity.unityController!.isLoaded() == true) {
-                    await unity.unityController!.unload();
-                  }
-                },
-              ),
+            UnityWidget(
+              onUnityCreated: (controller) {
+                unity.onUnityCreated(controller);
+              },
             ),
             Row(
               children: [

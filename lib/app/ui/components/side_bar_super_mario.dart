@@ -37,7 +37,7 @@ class SideBarSuperMario extends StatelessWidget {
                 height: Util.height(context) * .5,
               )
                   .animate(
-                    onPlay: (controller) => controller.repeat(),
+                    onComplete: (controller) => controller.stop(),
                   )
                   .moveY(
                     begin: -15,
