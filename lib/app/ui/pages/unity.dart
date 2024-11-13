@@ -35,6 +35,7 @@ class _UnityState extends State<Unity> {
       body: Stack(
         children: [
           UnityWidget(
+            unloadOnDispose: false,
             onUnityCreated: (controller) {
               unity.onUnityCreated(controller);
             },
@@ -49,7 +50,7 @@ class _UnityState extends State<Unity> {
                   heroTag: 'home',
                   onPressed: () async {
                     if (await unity.unityController!.isLoaded() == true) {
-                      await unity.unityController!.unload();
+                      //await unity.unityController!.unload();
                     }
                     await unity.unityController!.resume();
                     Get.offNamed('/home');
@@ -77,14 +78,14 @@ class _UnityState extends State<Unity> {
                   );
                 }),
                 const SizedBox(height: 10),
-                // FloatingActionButton(
-                //   heroTag: 'resume',
-                //   onPressed: () {
-                //     unityWidgetController!.resume();
-                //   },
-                //   backgroundColor: Colors.white,
-                //   child: const Icon(Icons.play_arrow),
-                // ),
+                FloatingActionButton(
+                  heroTag: 'resume',
+                  onPressed: () {
+                    unity.changeScene("EmptyScene");
+                  },
+                  backgroundColor: Colors.white,
+                  child: const Icon(Icons.change_circle),
+                ),
                 // const SizedBox(height: 10),
                 // FloatingActionButton(
                 //   heroTag: 'unload',
