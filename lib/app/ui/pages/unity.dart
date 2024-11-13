@@ -55,8 +55,12 @@ class _UnityState extends State<Unity> {
                     await unity.unityController!.resume();
                     Get.offNamed('/home');
                   },
+                  shape: const CircleBorder(),
                   backgroundColor: Colors.white,
-                  child: const Icon(Icons.home),
+                  child: const Icon(
+                    Icons.close,
+                    color: Colors.redAccent,
+                  ),
                 ),
                 const SizedBox(height: 10),
                 Obx(() {
@@ -71,21 +75,21 @@ class _UnityState extends State<Unity> {
                         isPaused(true);
                       }
                     },
+                    shape: const CircleBorder(),
                     backgroundColor: Colors.white,
                     child: Icon(
                       isPaused.value ? Icons.play_arrow : Icons.pause,
                     ),
                   );
                 }),
-                const SizedBox(height: 10),
-                FloatingActionButton(
-                  heroTag: 'resume',
-                  onPressed: () {
-                    unity.changeScene("EmptyScene");
-                  },
-                  backgroundColor: Colors.white,
-                  child: const Icon(Icons.change_circle),
-                ),
+                // FloatingActionButton(
+                //   heroTag: 'resume',
+                //   onPressed: () {
+                //     unity.changeScene("EmptyScene");
+                //   },
+                //   backgroundColor: Colors.white,
+                //   child: const Icon(Icons.change_circle),
+                // ),
                 // const SizedBox(height: 10),
                 // FloatingActionButton(
                 //   heroTag: 'unload',
@@ -98,6 +102,30 @@ class _UnityState extends State<Unity> {
               ],
             ),
           ),
+          Obx(() {
+            return isPaused.value
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 30, horizontal: 30),
+                    child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: SizedBox(
+                        width: Util.width(context) * .2,
+                        height: Util.height(context) * .1,
+                        child: const FittedBox(
+                          child: Text(
+                            "JOGO PAUSADO",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: "LEMONMILK-BOLD",
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                : const SizedBox();
+          }),
           Obx(() {
             if (isLoading.value) {
               return Stack(
