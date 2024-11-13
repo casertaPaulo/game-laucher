@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
@@ -40,6 +42,16 @@ class _UnityState extends State<Unity> {
               unity.onUnityCreated(controller);
             },
           ),
+          Obx(() {
+            return isPaused.value
+                ? Expanded(
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+                      child: Container(),
+                    ),
+                  )
+                : const SizedBox();
+          }),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: Column(
@@ -82,23 +94,6 @@ class _UnityState extends State<Unity> {
                     ),
                   );
                 }),
-                // FloatingActionButton(
-                //   heroTag: 'resume',
-                //   onPressed: () {
-                //     unity.changeScene("EmptyScene");
-                //   },
-                //   backgroundColor: Colors.white,
-                //   child: const Icon(Icons.change_circle),
-                // ),
-                // const SizedBox(height: 10),
-                // FloatingActionButton(
-                //   heroTag: 'unload',
-                //   onPressed: () {
-                //     unityWidgetController!.unload();
-                //   },
-                //   backgroundColor: Colors.white,
-                //   child: const Icon(Icons.delete),
-                // ),
               ],
             ),
           ),
@@ -106,12 +101,13 @@ class _UnityState extends State<Unity> {
             return isPaused.value
                 ? Padding(
                     padding: const EdgeInsets.symmetric(
-                        vertical: 30, horizontal: 30),
+                      vertical: 30,
+                      horizontal: 30,
+                    ),
                     child: Align(
                       alignment: Alignment.bottomRight,
                       child: SizedBox(
-                        width: Util.width(context) * .2,
-                        height: Util.height(context) * .1,
+                        width: Util.width(context) * .3,
                         child: const FittedBox(
                           child: Text(
                             "JOGO PAUSADO",
@@ -196,60 +192,4 @@ class _UnityState extends State<Unity> {
       ),
     );
   }
-
-  // Callback para atribuar o controllador da Unity Widget.
-  // void onUnityCreated(UnityWidgetController controller, String scene) {
-  //   unityWidgetController = controller;
-  //   changeScene(scene);
-  // }
-
-  // // Aciona o método de troca de cena da Unity.
-  // void changeScene(String scene) async {
-  //   unityWidgetController?.postMessage(
-  //     'SceneControl',
-  //     'LoadScene',
-  //     scene,
-  //   );
-  // }
 }
-
-
-
-
-// Stack(
-//         children: [
-//           UnityWidget(
-//             uiLevel: 0,
-//             fullscreen: false,
-//             onUnityCreated: (controller) {
-//               state.unityWidgetController = controller;
-//               print("INICIANDO O CONTROLADOR NO STATE");
-//               controller.postMessage(
-//                 'SceneControl',
-//                 'LoadScene',
-//                 widget.scene,
-//               );
-//             },
-//           ),
-//           Align(
-//             alignment: Alignment.bottomCenter,
-//             child: Padding(
-//                 padding: const EdgeInsets.only(bottom: 50),
-//                 child: FloatingActionButton(
-//                   heroTag: 'bt2',
-//                   backgroundColor: Colors.white,
-//                   child: const Center(
-//                     child: Icon(
-//                       Icons.home,
-//                       size: 35,
-//                     ),
-//                   ),
-//                   onPressed: () {
-//                     Get.toNamed('/home');
-//                   },
-//                 )),
-//           ),
-//           // Carrega a tela por 5 segundos
-
-//         ],
-//       ),
