@@ -44,10 +44,12 @@ class _UnityState extends State<Unity> {
           ),
           Obx(() {
             return isPaused.value
-                ? Expanded(
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-                      child: Container(),
+                ? BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+                    child: Container(
+                      width: double.infinity,
+                      height: double.infinity,
+                      color: Colors.black.withOpacity(0.2),
                     ),
                   )
                 : const SizedBox();
@@ -61,9 +63,6 @@ class _UnityState extends State<Unity> {
                 FloatingActionButton(
                   heroTag: 'home',
                   onPressed: () async {
-                    if (await unity.unityController!.isLoaded() == true) {
-                      //await unity.unityController!.unload();
-                    }
                     await unity.unityController!.resume();
                     Get.offNamed('/home');
                   },
