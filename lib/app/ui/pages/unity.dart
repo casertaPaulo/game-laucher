@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ class _UnityState extends State<Unity> {
   UnityController unity = Get.find();
   var isLoading = true.obs;
   var isPaused = false.obs;
+  RxInt highScore = 0.obs;
   var idPage = Get.parameters['id'];
 
   @override
@@ -40,6 +42,13 @@ class _UnityState extends State<Unity> {
             unloadOnDispose: false,
             onUnityCreated: (controller) {
               unity.onUnityCreated(controller);
+            },
+            onUnityMessage: (handler) {
+              debugPrint(handler.toString());
+              int score = int.parse(handler);
+              if (score > highScore.value) {
+                highScore(score);
+              }
             },
           ),
           Obx(() {
@@ -103,19 +112,50 @@ class _UnityState extends State<Unity> {
                       vertical: 30,
                       horizontal: 30,
                     ),
-                    child: Align(
-                      alignment: Alignment.bottomRight,
-                      child: SizedBox(
-                        width: Util.width(context) * .3,
-                        child: const FittedBox(
-                          child: Text(
-                            "JOGO PAUSADO",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: "LEMONMILK-BOLD",
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                            width: Util.width(context) * .2,
+                            child: FittedBox(
+                              child: RichText(
+                                textAlign: TextAlign.center,
+                                text: TextSpan(
+                                  style: const TextStyle(
+                                    fontSize: 25,
+                                    fontFamily: "LemonMilk-bold",
+                                  ),
+                                  children: [
+                                    const TextSpan(
+                                      text: 'RECORDE\n',
+                                    ),
+                                    TextSpan(
+                                      text: highScore.string,
+                                      style: const TextStyle(
+                                        fontSize: 40,
+                                        fontWeight: FontWeight.w900,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
-                        ),
+                          SizedBox(
+                            width: Util.width(context) * .3,
+                            child: const FittedBox(
+                              child: Text(
+                                "JOGO PAUSADO",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: "LEMONMILK-BOLD",
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   )
