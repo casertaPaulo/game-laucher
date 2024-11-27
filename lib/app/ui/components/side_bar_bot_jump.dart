@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:game_laucher/app/ui/widgets/block_button.dart';
 import 'package:game_laucher/util/util.dart';
 
-class SideBarSuperMario extends StatelessWidget {
-  const SideBarSuperMario({super.key});
+class SideBarBotJump extends StatelessWidget {
+  const SideBarBotJump({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +16,13 @@ class SideBarSuperMario extends StatelessWidget {
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
-                    Colors.red,
-                    Color(0xFF102447),
+                    Color(0xFF1a002a),
+                    //Color(0xFF102447),
+                    Colors.transparent
                   ],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  stops: [0.5, 0.9],
+                  stops: [0.5, 0.8],
                 ),
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(25),
@@ -31,29 +31,17 @@ class SideBarSuperMario extends StatelessWidget {
               ),
             ),
             Align(
-              alignment: Alignment.center,
-              child: Image.asset(
-                'assets/images/mario-jumpin.png',
-                height: Util.height(context) * .5,
-              )
-                  .animate(
-                    onComplete: (controller) => controller.stop(),
-                  )
-                  .moveY(
-                    begin: -15,
-                    end: 10,
-                    curve: Curves.easeInOut,
-                    duration: 1000.ms,
-                  )
-                  .then()
-                  .moveY(begin: 10, end: -15, curve: Curves.easeInOut),
-            ),
+                alignment: Alignment.center,
+                child: Image.asset(
+                  'assets/images/bot-jump-panel.png',
+                  height: Util.height(context) * .62,
+                )),
             Padding(
               padding: EdgeInsets.all(Util.height(context) * .03),
               child: Align(
-                alignment: Alignment.topLeft,
+                alignment: Alignment.topRight,
                 child: Image.asset(
-                  'assets/images/mario-text2.png',
+                  'assets/images/bot-jumping-text.png',
                   height: Util.height(context) * .20,
                 ),
               ),

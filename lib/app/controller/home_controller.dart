@@ -3,7 +3,7 @@ import 'package:game_laucher/app/controller/unity_controller.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  RxBool isMarioSelected = false.obs;
+  RxBool isBotJumpSelected = false.obs;
   UnityController unity = Get.find();
 
   @override

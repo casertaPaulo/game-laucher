@@ -1,14 +1,13 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 import 'package:game_laucher/app/controller/home_controller.dart';
 import 'package:game_laucher/app/controller/unity_controller.dart';
 import 'package:game_laucher/app/ui/components/side_bar_space_shooter.dart';
-import 'package:game_laucher/app/ui/components/side_bar_super_mario.dart';
+import 'package:game_laucher/app/ui/components/side_bar_bot_jump.dart';
 import 'package:game_laucher/app/ui/components/space_shooter_card.dart';
-import 'package:game_laucher/app/ui/components/super_mario_card.dart';
+import 'package:game_laucher/app/ui/components/bot_jump_card.dart';
 import 'package:game_laucher/util/util.dart';
 
 import 'package:get/get.dart';
@@ -149,7 +148,7 @@ class HomePage extends StatelessWidget {
                                   Flexible(
                                     child: GestureDetector(
                                       onTap: () {
-                                        controller.isMarioSelected.value =
+                                        controller.isBotJumpSelected.value =
                                             false;
                                         print("CLicou no SpaceShooter");
                                       },
@@ -161,7 +160,7 @@ class HomePage extends StatelessWidget {
                                             .scaleXY(
                                               begin: 1,
                                               end: controller
-                                                      .isMarioSelected.value
+                                                      .isBotJumpSelected.value
                                                   ? 0.9
                                                   : 1.1,
                                             ),
@@ -172,11 +171,12 @@ class HomePage extends StatelessWidget {
                                   Flexible(
                                     child: GestureDetector(
                                       onTap: () {
-                                        controller.isMarioSelected.value = true;
+                                        controller.isBotJumpSelected.value =
+                                            true;
                                         print("CLicou no SuperMario");
                                       },
                                       child: Obx(
-                                        () => const SuperMarioCard()
+                                        () => const BotJumpCard()
                                             .animate()
                                             .fadeIn(duration: 500.ms)
                                             .then()
@@ -185,7 +185,7 @@ class HomePage extends StatelessWidget {
                                               curve: Curves.elasticOut,
                                               duration: 1500.ms,
                                               end: controller
-                                                      .isMarioSelected.value
+                                                      .isBotJumpSelected.value
                                                   ? 1.1
                                                   : 0.9,
                                             ),
@@ -203,8 +203,8 @@ class HomePage extends StatelessWidget {
                 ),
                 Expanded(
                   child: Obx(() {
-                    return controller.isMarioSelected.value
-                        ? const SideBarSuperMario()
+                    return controller.isBotJumpSelected.value
+                        ? const SideBarBotJump()
                         : const SideBarSpaceShooter();
                   }),
                 )

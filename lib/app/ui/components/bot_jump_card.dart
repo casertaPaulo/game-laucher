@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:game_laucher/util/util.dart';
 
-class SuperMarioCard extends StatelessWidget {
-  const SuperMarioCard({super.key});
+class BotJumpCard extends StatelessWidget {
+  const BotJumpCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,23 +21,27 @@ class SuperMarioCard extends StatelessWidget {
                   color: Colors.white,
                   width: 1,
                 )),
+            //color: const Color(0xFF1a002a),
             gradient: const LinearGradient(
               colors: [
-                Colors.red,
-                Color(0xFFf86977),
+                Colors.pink,
+                Color(0xFF1a002a),
               ],
+              stops: [0.3, 0.9],
               begin: Alignment.bottomLeft,
               end: Alignment.topRight,
             ),
             borderRadius: BorderRadius.circular(50),
           ),
         ),
-        Positioned.fill(
-          top: Util.height(context) * -.1,
-          right: Util.width(context) * -.1,
-          child: Image.asset('assets/images/mario.png',
-              height: Util.height(context) * .5 // Link da imagem
-              ),
+        Positioned(
+          //top: Util.height(context) * -.1,
+          right: Util.width(context) * .01,
+          bottom: Util.height(context) * .02,
+          child: Image.asset(
+            'assets/images/bot.png',
+            height: Util.height(context) * .4, // Link da imagem
+          ),
         ),
         Positioned(
           top: Util.height(context) * .05,
@@ -79,7 +83,7 @@ class SuperMarioCard extends StatelessWidget {
           bottom: Util.height(context) * .05,
           left: Util.width(context) * .02,
           child: Image.asset(
-            'assets/images/mario-text2.png',
+            'assets/images/bot-jumping-text.png',
             height: Util.height(context) * .15,
           ),
         ),
