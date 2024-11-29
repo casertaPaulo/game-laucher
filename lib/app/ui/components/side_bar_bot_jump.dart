@@ -15,11 +15,7 @@ class SideBarBotJump extends StatelessWidget {
             Container(
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [
-                    Color(0xFF1a002a),
-                    //Color(0xFF102447),
-                    Colors.transparent
-                  ],
+                  colors: [Color(0xFF1a002a), Colors.transparent],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   stops: [0.5, 0.8],
@@ -31,15 +27,15 @@ class SideBarBotJump extends StatelessWidget {
               ),
             ),
             Align(
-                alignment: Alignment.center,
+                alignment: Alignment.bottomCenter,
                 child: Image.asset(
-                  'assets/images/bot-jump-panel.png',
+                  'assets/images/bot-jump-panel-edit.png',
                   height: Util.height(context) * .62,
                 )),
             Padding(
               padding: EdgeInsets.all(Util.height(context) * .03),
               child: Align(
-                alignment: Alignment.topRight,
+                alignment: Alignment.topLeft,
                 child: Image.asset(
                   'assets/images/bot-jumping-text.png',
                   height: Util.height(context) * .20,

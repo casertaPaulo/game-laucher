@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:game_laucher/util/util.dart';
 
 class BotJumpCard extends StatelessWidget {
@@ -21,12 +22,8 @@ class BotJumpCard extends StatelessWidget {
                   color: Colors.white,
                   width: 1,
                 )),
-            //color: const Color(0xFF1a002a),
             gradient: const LinearGradient(
-              colors: [
-                Colors.pink,
-                Color(0xFF1a002a),
-              ],
+              colors: [Colors.pink, Color(0xFF1a002a)],
               stops: [0.3, 0.9],
               begin: Alignment.bottomLeft,
               end: Alignment.topRight,
@@ -39,7 +36,7 @@ class BotJumpCard extends StatelessWidget {
           right: Util.width(context) * .01,
           bottom: Util.height(context) * .02,
           child: Image.asset(
-            'assets/images/bot.png',
+            'assets/images/bot-flutter.png',
             height: Util.height(context) * .4, // Link da imagem
           ),
         ),

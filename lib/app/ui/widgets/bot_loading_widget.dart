@@ -26,27 +26,9 @@ class BotLoadingWidget extends StatelessWidget {
           Align(
             alignment: Alignment.bottomRight,
             child: Image.asset(
-              'assets/images/bot-jump-full.png',
-              height: Util.height(context) * .8,
+              'assets/images/bot-full.png',
             ),
-          )
-              .animate(
-                onPlay: (controller) => controller.repeat(),
-                onComplete: (controller) => controller.dispose(),
-              )
-              .then()
-              .moveY(
-                begin: -8,
-                end: 4,
-                curve: Curves.easeInOut,
-                duration: 1000.ms,
-              )
-              .then()
-              .moveY(
-                begin: 4,
-                end: -8,
-                curve: Curves.easeInOut,
-              ),
+          ),
           const Align(
             alignment: Alignment.bottomLeft,
             child: Padding(

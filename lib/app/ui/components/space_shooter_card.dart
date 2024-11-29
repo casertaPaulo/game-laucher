@@ -13,8 +13,9 @@ class SpaceShooterCard extends StatelessWidget {
           height: Util.height(context) * 0.4,
           decoration: BoxDecoration(
             image: const DecorationImage(
-                image: AssetImage("assets/images/background-space.png"),
-                fit: BoxFit.fill),
+              image: AssetImage("assets/images/background-space.png"),
+              fit: BoxFit.fill,
+            ),
             border: const Border(
                 left: BorderSide(
                   color: Colors.white,
