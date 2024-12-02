@@ -27,7 +27,7 @@ class _UnityState extends State<Unity> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       unity.changeScene(idPage!);
-      Future.delayed(const Duration(minutes: 3), () {
+      Future.delayed(const Duration(seconds: 3), () {
         isLoading(false);
       });
     });
@@ -38,8 +38,11 @@ class _UnityState extends State<Unity> {
     return Scaffold(
       body: Stack(
         children: [
+          // Mostra a widget da Unity
           _buildUnity(),
+          // Mostra um blur de background quando está pausado
           _buildBlueWhenIsPaused(),
+          // Mostra os botões laterais
           _buildButtons(),
           _buildPausedScreen(),
           _buildLoadingWidget(),

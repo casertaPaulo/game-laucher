@@ -5,34 +5,36 @@ import 'package:get/get.dart';
 
 class BlockButton extends StatelessWidget {
   final String gameScene;
-  const BlockButton({super.key, required this.gameScene});
+  final Color color;
+  const BlockButton({super.key, required this.gameScene, required this.color});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton.icon(
-              style: ElevatedButton.styleFrom(
-                  elevation: 2,
-                  backgroundColor: Colors.redAccent,
-                  padding: EdgeInsets.all(
-                    Util.height(context) * .03,
-                  ),
-                  textStyle: const TextStyle(
-                    fontSize: 18,
-                    fontFamily: "LemonMilk-bold",
-                  )),
-              onPressed: () {
-                Get.offNamed('/unity/$gameScene');
-              },
-              label: const Text(
-                "JOGAR",
-                style: TextStyle(color: Colors.white),
-              ),
-              icon: const Icon(
-                Icons.play_arrow,
-                color: Colors.white,
-              ))
+        style: ElevatedButton.styleFrom(
+            elevation: 2,
+            backgroundColor: color,
+            padding: EdgeInsets.all(
+              Util.height(context) * .03,
+            ),
+            textStyle: const TextStyle(
+              fontSize: 18,
+              fontFamily: "LemonMilk-bold",
+            )),
+        onPressed: () {
+          Get.offNamed('/unity/$gameScene');
+        },
+        label: const Text(
+          "JOGAR",
+          style: TextStyle(color: Colors.white),
+        ),
+        icon: const Icon(
+          Icons.play_arrow,
+          color: Colors.white,
+        ),
+      )
           .animate(
             onComplete: (controller) {
               controller.stop();

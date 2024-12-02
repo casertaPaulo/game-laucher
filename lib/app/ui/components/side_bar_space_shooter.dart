@@ -77,6 +77,7 @@ class SideBarSpaceShooter extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 BlockButton(
+                  color: Color(0xFFFF7043),
                   gameScene: 'GameScene',
                 )
               ],
