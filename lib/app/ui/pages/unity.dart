@@ -44,7 +44,9 @@ class _UnityState extends State<Unity> {
           _buildBlueWhenIsPaused(),
           // Mostra os botões laterais
           _buildButtons(),
+          // Mostra a tela de pause
           _buildPausedScreen(),
+          // Mostra a widget de Loading enquanto a unity carrega
           _buildLoadingWidget(),
         ],
       ),
@@ -190,14 +192,13 @@ class _UnityState extends State<Unity> {
 
   Widget _buildLoadingWidget() {
     return Obx(() {
-      if (isLoading.value) {
-        if (idPage == "GameScene") {
-          return const SpaceLoadingWidget();
-        }
-        return const BotLoadingWidget();
-      } else {
+      if (!isLoading.value) {
         return const SizedBox();
       }
+      if (idPage == "GameScene") {
+        return const SpaceLoadingWidget();
+      }
+      return const BotLoadingWidget();
     });
   }
 }
