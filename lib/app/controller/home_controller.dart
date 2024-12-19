@@ -11,7 +11,6 @@ class HomeController extends GetxController {
     super.onInit();
     WidgetsBinding.instance.addPostFrameCallback((timestamp) {
       unity.changeScene("EmptyScene");
-      //unity.unityController!.unload();
     });
   }
 }

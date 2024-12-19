@@ -81,7 +81,7 @@ class SideBarBotJump extends StatelessWidget {
         children: [
           BlockButton(
             color: Color(0xFFff64b1),
-            gameScene: 'PinkScene',
+            gameScene: 'JumpScene',
           ),
         ],
       ),

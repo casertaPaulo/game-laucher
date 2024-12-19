@@ -12,11 +12,13 @@ dependencies:
     sdk: flutter
   flutter_animate: ^4.5.0
   flutter_svg: ^2.0.10+1
+  lottie: ^3.2.0
   get: ^4.6.6
   flutter_unity_widget:
     git:
       url: https://github.com/juicycleff/flutter-unity-view-widget.git
       ref: flutter_3.24_android_hotfix # branch name
+
       # UPDATE: this fix is now included in the master branch
 
 dev_dependencies:

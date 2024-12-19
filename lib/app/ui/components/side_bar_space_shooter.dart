@@ -78,7 +78,7 @@ class SideBarSpaceShooter extends StatelessWidget {
               children: [
                 BlockButton(
                   color: Color(0xFFFF7043),
-                  gameScene: 'GameScene',
+                  gameScene: 'SpaceScene',
                 )
               ],
             ),
