@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:game_laucher/util/util.dart';
 
-class SpaceShooterCard extends StatelessWidget {
-  const SpaceShooterCard({super.key});
+class BotJumpCard extends StatelessWidget {
+  const BotJumpCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,10 +12,6 @@ class SpaceShooterCard extends StatelessWidget {
         Container(
           height: Util.height(context) * 0.4,
           decoration: BoxDecoration(
-            image: const DecorationImage(
-              image: AssetImage("assets/images/background-space.png"),
-              fit: BoxFit.fill,
-            ),
             border: const Border(
                 left: BorderSide(
                   color: Colors.white,
@@ -25,19 +21,24 @@ class SpaceShooterCard extends StatelessWidget {
                   color: Colors.white,
                   width: 1,
                 )),
+            gradient: const LinearGradient(
+              colors: [Colors.pink, Color(0xFF1a002a)],
+              stops: [0.3, 0.9],
+              begin: Alignment.bottomLeft,
+              end: Alignment.topRight,
+            ),
             borderRadius: BorderRadius.circular(50),
           ),
         ),
-        // IMAGEM DA NAVE
         Positioned(
-          top: Util.height(context) * -.05,
-          right: Util.width(context) * -.025,
+          //top: Util.height(context) * -.1,
+          right: Util.width(context) * .01,
+          bottom: Util.height(context) * .02,
           child: Image.asset(
-            'assets/images/ship-normal2.png',
-            height: Util.height(context) * .51,
+            'assets/images/bot-jump/bot-flutter.png',
+            height: Util.height(context) * .4,
           ),
         ),
-        // IMAGEM
         Positioned(
           top: Util.height(context) * .05,
           left: Util.width(context) * .02,
@@ -62,7 +63,7 @@ class SpaceShooterCard extends StatelessWidget {
                   width: Util.width(context) * 0.055,
                   child: FittedBox(
                     child: Text(
-                      "GAME 1",
+                      "GAME 2",
                       style: TextStyle(
                         fontFamily: "Lemonmilk-bold",
                         color: Colors.grey[200],
@@ -78,7 +79,7 @@ class SpaceShooterCard extends StatelessWidget {
           bottom: Util.height(context) * .05,
           left: Util.width(context) * .02,
           child: Image.asset(
-            'assets/images/space-shooter.png',
+            'assets/images/bot-jump/bot-jumping-text.png',
             height: Util.height(context) * .15,
           ),
         ),

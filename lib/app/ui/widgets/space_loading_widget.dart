@@ -13,7 +13,8 @@ class SpaceLoadingWidget extends StatelessWidget {
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/background-space.png'),
+                image: AssetImage(
+                    'assets/images/space-shooter/background-space.png'),
                 alignment: Alignment.topCenter,
                 fit: BoxFit.cover,
               ),
@@ -35,7 +36,7 @@ class SpaceLoadingWidget extends StatelessWidget {
           Align(
             alignment: Alignment.centerRight,
             child: Image.asset(
-              'assets/images/ship-normal2.png',
+              'assets/images/space-shooter/ship-normal2.png',
               height: Util.height(context) * .8,
             ),
           )

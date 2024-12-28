@@ -4,10 +4,10 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 import 'package:game_laucher/app/controller/home_controller.dart';
 import 'package:game_laucher/app/controller/unity_controller.dart';
-import 'package:game_laucher/app/ui/components/side_bar_space_shooter.dart';
-import 'package:game_laucher/app/ui/components/side_bar_bot_jump.dart';
-import 'package:game_laucher/app/ui/components/space_shooter_card.dart';
-import 'package:game_laucher/app/ui/components/bot_jump_card.dart';
+import 'package:game_laucher/app/ui/components/space-shooter/side_bar_space_shooter.dart';
+import 'package:game_laucher/app/ui/components/bot-jump/side_bar_bot_jump.dart';
+import 'package:game_laucher/app/ui/components/space-shooter/space_shooter_card.dart';
+import 'package:game_laucher/app/ui/components/bot-jump/bot_jump_card.dart';
 import 'package:game_laucher/util/util.dart';
 
 import 'package:get/get.dart';
@@ -66,7 +66,6 @@ class HomePage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     SizedBox(
-                                      //color: Colors.blue,
                                       width: Util.width(context) * .25,
                                       child: FittedBox(
                                         child: RichText(
@@ -92,7 +91,6 @@ class HomePage extends StatelessWidget {
                                       ),
                                     ),
                                     SizedBox(
-                                      //color: Colors.red,
                                       width: Util.width(context) * .25,
                                       height: Util.height(context) * .07,
                                       child: FittedBox(
@@ -214,24 +212,5 @@ class HomePage extends StatelessWidget {
         ),
       ),
     );
-
-    /*
-    
-    LayoutBuilder(
-      builder: (context, constraints) {
-        if (constraints.maxWidth > 900) {
-          // Telas de tablet em paisagem.
-          return 
-        } else if (constraints.maxWidth > 600) {
-          // Telas de tablet na vertical.
-          return const SizedBox();
-        } else {
-          return const Text("Tela de Smarphone em pé.");
-        }
-      },
-    );
-    
-    
-    */
   }
 }

@@ -15,14 +15,14 @@ class SideBarSpaceShooter extends StatelessWidget {
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/background-space.png'),
+                image: AssetImage(
+                    'assets/images/space-shooter/background-space.png'),
                 alignment: Alignment.topCenter,
                 fit: BoxFit.cover,
               ),
               borderRadius: BorderRadius.all(Radius.circular(25)),
             ),
           ),
-          // Nave!
 
           // Degradê para suavizar a transição para a cor de fundo
           Container(
@@ -45,7 +45,7 @@ class SideBarSpaceShooter extends StatelessWidget {
           Align(
             alignment: Alignment.centerRight,
             child: Image.asset(
-              'assets/images/ship-normal2.png',
+              'assets/images/space-shooter/ship-normal2.png',
               height: Util.height(context) * .5,
             )
                 .animate(
@@ -66,7 +66,7 @@ class SideBarSpaceShooter extends StatelessWidget {
             child: Align(
               alignment: Alignment.topLeft,
               child: Image.asset(
-                'assets/images/space-shooter.png',
+                'assets/images/space-shooter/space-shooter.png',
                 height: Util.height(context) * .20,
               ),
             ),

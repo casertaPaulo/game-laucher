@@ -45,7 +45,7 @@ class SideBarBotJump extends StatelessWidget {
       child: Align(
         alignment: Alignment.topLeft,
         child: Image.asset(
-          'assets/images/bot-jumping-text.png',
+          'assets/images/bot-jump/bot-jumping-text.png',
           height: Get.height * .20,
         ),
       ),
@@ -56,7 +56,7 @@ class SideBarBotJump extends StatelessWidget {
     return Align(
       alignment: Alignment.center,
       child: Image.asset(
-        'assets/images/bot-pannel.png',
+        'assets/images/bot-jump/bot-pannel.png',
         height: Get.height * .50,
       )
           .animate(

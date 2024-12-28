@@ -31,6 +31,8 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/images/space-shooter/
+    - assets/images/bot-jump/
     
   fonts:
     - family: KanitBold

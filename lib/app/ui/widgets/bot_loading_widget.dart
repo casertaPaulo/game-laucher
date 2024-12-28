@@ -13,7 +13,7 @@ class BotLoadingWidget extends StatelessWidget {
           Align(
             alignment: Alignment.bottomRight,
             child: Image.asset(
-              'assets/images/bot-full.png',
+              'assets/images/bot-jump/bot-full.png',
             ),
           ),
           // Efeito de gradient por cima da imagem

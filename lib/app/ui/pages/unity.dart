@@ -1,10 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 import 'package:game_laucher/app/controller/unity_controller.dart';
-import 'package:game_laucher/app/ui/components/side_bar_bot_jump.dart';
 import 'package:game_laucher/app/ui/widgets/bot_loading_widget.dart';
 import 'package:game_laucher/app/ui/widgets/space_loading_widget.dart';
 import 'package:game_laucher/util/util.dart';
@@ -24,11 +22,14 @@ class _UnityState extends State<Unity> {
   RxInt highScore = 0.obs;
   var idPage = Get.parameters['id'];
 
+  // Executa o método de troca de Scene assim que a tela é carregada com o WidgetsBinding.
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       unity.changeScene(idPage!);
+      //Espera um tempinho até que a Scene tenha sido carregado por completo. UX Improve.
+      //isLoading define se vou mostrar uma tela de Loading por cima da Unity (enquanto carrega) ou não
       Future.delayed(const Duration(seconds: 3), () {
         isLoading(false);
       });
@@ -40,12 +41,10 @@ class _UnityState extends State<Unity> {
     return Scaffold(
       body: Stack(
         children: [
-          // Mostra a widget da Unity
+          // Mostra a widget da Unity (Game)
           _buildUnity(),
           // Mostra o recorde no canto superior direito
           _buildHighScore(),
-          // Mostra um pop-up com a mensagem de record quebrado
-          _buildTriggerMessage(),
           // Mostra um blur de background quando está pausado
           _buildBlueWhenIsPaused(),
           // Mostra a tela de pause
@@ -61,13 +60,15 @@ class _UnityState extends State<Unity> {
 
   Widget _buildUnity() {
     return UnityWidget(
-      unloadOnDispose: false,
+      // Passa o controller da Unity ao carregar a Widget do Unity
       onUnityCreated: (controller) {
         unity.onUnityCreated(controller);
       },
+      // Recebe a mensagem do score quando a nave é destruida
       onUnityMessage: (handler) {
         debugPrint(handler.toString());
         int score = int.parse(handler);
+        // Lógica para setar o valor do Score caso seja atualizado
         if (score > highScore.value) {
           highScore(score);
         }
@@ -121,60 +122,6 @@ class _UnityState extends State<Unity> {
     });
   }
 
-  Widget _buildTriggerMessage() {
-    return Padding(
-      padding: const EdgeInsets.only(right: 30),
-      child: Align(
-          alignment: Alignment.centerRight,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Icon(
-                Icons.star,
-                size: 50,
-                color: Colors.amber,
-              ),
-              SizedBox(
-                width: Get.width * .13,
-                height: Get.height * .13,
-                child: FittedBox(
-                  child: RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                      style: const TextStyle(
-                        fontFamily: "LemonMilk-bold",
-                      ),
-                      children: [
-                        TextSpan(
-                            text: 'RECORDE\n',
-                            style: TextStyle(
-                              color: Colors.grey[300],
-                            )),
-                        const TextSpan(
-                          text: "BATIDO!",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w900,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          )),
-    )
-        .animate(
-          onPlay: (controller) => controller.repeat(),
-        )
-        .moveX(
-          begin: 150,
-          end: 0,
-          duration: 2000.ms,
-          curve: Curves.fastLinearToSlowEaseIn,
-        );
-  }
-
   Widget _buildHighScore() {
     return Padding(
       padding: const EdgeInsets.only(top: 10, right: 30),
@@ -184,6 +131,7 @@ class _UnityState extends State<Unity> {
           width: Get.width * .14,
           height: Get.height * .13,
           child: Obx(() {
+            int highestScore = highScore.value;
             return FittedBox(
               child: RichText(
                 textAlign: TextAlign.center,
@@ -198,7 +146,7 @@ class _UnityState extends State<Unity> {
                           color: Colors.grey[300],
                         )),
                     TextSpan(
-                      text: highScore.value.toString(),
+                      text: highestScore == 0 ? "N/A" : highestScore.toString(),
                       style: const TextStyle(
                         fontFamily: "ROBOTOCONDENSED",
                         fontWeight: FontWeight.w900,
@@ -224,6 +172,7 @@ class _UnityState extends State<Unity> {
           FloatingActionButton(
             heroTag: 'home',
             onPressed: () async {
+              // Dá play no jogo caso esteja pausado ao sair. Sem fazer isso, a Unity buga.
               await unity.unityController!.resume();
               Get.offNamed('/home');
             },
@@ -236,6 +185,7 @@ class _UnityState extends State<Unity> {
           ),
           const SizedBox(height: 10),
           Obx(() {
+            // Gerencia o state do botão PAUSE ( Ícone e Método )
             return FloatingActionButton(
               heroTag: 'pause',
               onPressed: () async {
